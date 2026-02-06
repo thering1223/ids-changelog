@@ -1,12 +1,7 @@
 {
-  "version": "0.0.1",
-  "updated_at": "2026-01-27T05:39:16Z",
+  "version": "2.0.1",
+  "updated_at": "2026-02-06T09:29:16Z",
   "components": [],
-  "variables": [
-    {
-      "key": "4c81c677caf76211096603f744e9f18e2c30664c",
-      "name": "bg/success"
-    }
-  ],
+  "variables": [],
   "styles": []
 }
