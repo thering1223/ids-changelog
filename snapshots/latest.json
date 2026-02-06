@@ -1,7 +1,12 @@
 {
-  "version": "2.0.1",
-  "updated_at": "2026-02-06T09:29:16Z",
-  "components": [],
+  "version": "0.1.0",
+  "updated_at": "2026-02-06T09:39:50Z",
+  "components": [
+    {
+      "name": "textarea",
+      "key": "0ff69b8c079393a95302631a98eab2a16680cf71"
+    }
+  ],
   "variables": [],
   "styles": []
 }
