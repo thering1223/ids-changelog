@@ -1,0 +1,11 @@
+다음 변경 내역을 한국어 1~2문장으로 요약하세요.
+
+- Variables: {{variables}}
+- Styles: {{styles}}
+- Components: {{components}}
+
+규칙:
+- "디자인 시스템" 표현 생략
+- 변수명은 원래 토큰명 그대로 사용 (번역 금지)
+- 소속 컬렉션명 포함 (예: Spacing / spacing-12)
+- 기술적이되 간결하게
