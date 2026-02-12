@@ -2,6 +2,7 @@
 
 | 버전 | 날짜 | 요약 |
 |------|------|------|
+| [v0.7.0](./v0.7.0.md) | 2026-02-12 | `bg/test2` 변수가 추가되고, `bg/text` 변수는 삭제되었으며, 16개 변수가 수정되었습니다. |
 | [v0.6.0](./v0.6.0.md) | 2026-02-12 | 새로운 bg/test 변수가 추가되었고, fg/success, border/neutral 등 다수의 변수명이 간소화되었습니다. 이와 함께, bg/neutral-pressed 등 여러 변수가 스냅샷 미등록 상태로 수정되었습니다. |
 | [v0.5.0](./v0.5.0.md) | 2026-02-12 | variables 컬렉션에 `bg/text` 변수가 추가되었고, `fg/success`, `bg/neutral-pressed`, `border/neutral-subtle` 등 다수의 기존 변수가 수정되었습니다. |
 | [v0.4.0](./v0.4.0.md) | 2026-02-12 | `spacing/spacing-12` 변수가 추가되었고, `spacing/spacing-13-555111` 변수는 삭제되었으며, `spacing/spacing-test` 변수가 `spacing/spacing-test11`로 이름 변경되었습니다. |
