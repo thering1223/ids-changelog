@@ -1,0 +1,9 @@
+배포 메시지: "{{description}}"
+
+실제 변경:
+- Variables: {{variables}}
+- Styles: {{styles}}
+- Components: {{components}}
+
+메시지에 언급되었지만 변경에 없는 항목, 또는 변경되었지만 메시지에 없는 주요 항목을 알려주세요.
+문제없으면 "일치"라고만 답하세요. 한국어로 간결하게.
