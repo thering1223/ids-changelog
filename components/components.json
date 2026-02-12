@@ -1,8 +1,106 @@
 {
   "$extensions": {
     "figma": {
-      "updatedAt": "2026-02-12T00:00:00Z",
-      "keyIndex": {}
+      "updatedAt": "2026-02-12T05:11:48Z",
+      "keyIndex": {
+        "5fa4d805d4001b2e1a28c07bb04be09bd36a866a": "Frame 1.type=success",
+        "a77f0887f1c8f1ce95889ca01325b2cd1e5f5013": "Frame 1.type=error",
+        "db6454acbbd342a282bf43b6c5f125853b7513cf": "Frame 1.type=default"
+      }
+    }
+  },
+  "Frame 1": {
+    "type=success": {
+      "type": "COMPONENT",
+      "layout": "HORIZONTAL",
+      "gap": 4,
+      "children": {
+        "check-circle": {
+          "type": "INSTANCE",
+          "componentId": "600:3367",
+          "children": {
+            "vector": {
+              "type": "VECTOR",
+              "fill": "#30a46c"
+            }
+          }
+        },
+        "text": {
+          "type": "TEXT",
+          "fill": "#30a46c",
+          "fontSize": 13,
+          "fontWeight": 500,
+          "fontFamily": "Pretendard",
+          "color": "#30a46c"
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "5fa4d805d4001b2e1a28c07bb04be09bd36a866a"
+        }
+      }
+    },
+    "type=error": {
+      "type": "COMPONENT",
+      "layout": "HORIZONTAL",
+      "gap": 4,
+      "children": {
+        "error-solid": {
+          "type": "INSTANCE",
+          "componentId": "990:5085",
+          "children": {
+            "vector": {
+              "type": "VECTOR",
+              "fill": "#e5484d"
+            }
+          }
+        },
+        "text": {
+          "type": "TEXT",
+          "fill": "#e5484d",
+          "fontSize": 13,
+          "fontWeight": 500,
+          "fontFamily": "Pretendard",
+          "color": "#e5484d"
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "a77f0887f1c8f1ce95889ca01325b2cd1e5f5013"
+        }
+      }
+    },
+    "type=default": {
+      "type": "COMPONENT",
+      "layout": "HORIZONTAL",
+      "gap": 4,
+      "fill": "#ffffff",
+      "children": {
+        "info": {
+          "type": "INSTANCE",
+          "visible": false,
+          "componentId": "600:2731",
+          "children": {
+            "vector": {
+              "type": "VECTOR",
+              "fill": "#8b8d98"
+            }
+          }
+        },
+        "text": {
+          "type": "TEXT",
+          "fill": "#8b8d98",
+          "fontSize": 13,
+          "fontWeight": 500,
+          "fontFamily": "Pretendard",
+          "color": "#8b8d98"
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "db6454acbbd342a282bf43b6c5f125853b7513cf"
+        }
+      }
     }
   }
 }
