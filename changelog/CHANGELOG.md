@@ -2,6 +2,7 @@
 
 | 버전 | 날짜 | 요약 |
 |------|------|------|
+| [v0.4.0](./v0.4.0.md) | 2026-02-12 | `spacing/spacing-12` 변수가 추가되었고, `spacing/spacing-13-555111` 변수는 삭제되었으며, `spacing/spacing-test` 변수가 `spacing/spacing-test11`로 이름 변경되었습니다. |
 | [v0.3.0](./v0.3.0.md) | 2026-02-12 | 변수 `spacing / spacing-test`가 추가되었고, `spacing / spacing-13-555111` 변수가 수정되었습니다. |
 | [v0.2.0](./v0.2.0.md) | 2026-02-12 | 변수: spacing/spacing-12-test1이(가) 삭제되었고, spacing/spacing-13-555이(가) 수정되었습니다 (스냅샷 미등록). |
 | [v0.1.0](./v0.1.0.md) | 2026-02-12 | Spacing 컬렉션에 `spacing-13` 변수가 추가되었으며, `spacing-12-test` 변수가 `spacing-12-test1`로 이름 변경되었습니다. |
