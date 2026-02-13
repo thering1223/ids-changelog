@@ -9,7 +9,7 @@
         "33a5db6ffa9c2b6034fbd4c6cbc6a5fd2dc93d1c": "Frame 1.label",
         "7196054c51cc2888ffbea44e73d4df75a1b452c4": "test-3.test-3",
         "fc519222456f530f66fc92a1ff5a2a1f2cbd032d": "test-4.test-4",
-        "cb8fb7fca13e90182a7644e5d5608b83cfc9753a": "-.Frame 1"
+        "cb8fb7fca13e90182a7644e5d5608b83cfc9753a": "Frame 1.Frame 1"
       }
     }
   },
@@ -191,6 +191,15 @@
           "key": "33a5db6ffa9c2b6034fbd4c6cbc6a5fd2dc93d1c"
         }
       }
+    },
+    "Frame 1": {
+      "type": "COMPONENT",
+      "fill": "#683d3d",
+      "$extensions": {
+        "figma": {
+          "key": "cb8fb7fca13e90182a7644e5d5608b83cfc9753a"
+        }
+      }
     }
   },
   "test-3": {
@@ -217,7 +226,6 @@
       }
     }
   },
-  "test-5": {},
   "test-4": {
     "test-4": {
       "type": "COMPONENT",
@@ -246,17 +254,6 @@
       "$extensions": {
         "figma": {
           "key": "fc519222456f530f66fc92a1ff5a2a1f2cbd032d"
-        }
-      }
-    }
-  },
-  "-": {
-    "Frame 1": {
-      "type": "COMPONENT",
-      "fill": "#683d3d",
-      "$extensions": {
-        "figma": {
-          "key": "cb8fb7fca13e90182a7644e5d5608b83cfc9753a"
         }
       }
     }
