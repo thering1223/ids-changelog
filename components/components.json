@@ -1,7 +1,7 @@
 {
   "$extensions": {
     "figma": {
-      "updatedAt": "2026-02-13T05:38:53Z",
+      "updatedAt": "2026-02-13T05:40:46Z",
       "keyIndex": {
         "5fa4d805d4001b2e1a28c07bb04be09bd36a866a": "Frame 1.type=success",
         "a77f0887f1c8f1ce95889ca01325b2cd1e5f5013": "Frame 1.type=error",
@@ -192,7 +192,7 @@
     },
     "Frame 1": {
       "type": "COMPONENT",
-      "fill": "#b9bbc6",
+      "fill": "#ff5b1a",
       "$extensions": {
         "figma": {
           "key": "cb8fb7fca13e90182a7644e5d5608b83cfc9753a"
