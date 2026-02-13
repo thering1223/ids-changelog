@@ -1,7 +1,7 @@
 {
   "$extensions": {
     "figma": {
-      "updatedAt": "2026-02-13T02:46:35Z",
+      "updatedAt": "2026-02-13T04:38:06Z",
       "keyIndex": {
         "5fa4d805d4001b2e1a28c07bb04be09bd36a866a": "Frame 1.type=success",
         "a77f0887f1c8f1ce95889ca01325b2cd1e5f5013": "Frame 1.type=error",
@@ -9,7 +9,8 @@
         "33a5db6ffa9c2b6034fbd4c6cbc6a5fd2dc93d1c": "Frame 1.label",
         "7196054c51cc2888ffbea44e73d4df75a1b452c4": "test-3.test-3",
         "37375c3a9feb663e9eae7c7fa22fbe3e10fa1909": "test-5.test-5",
-        "fc519222456f530f66fc92a1ff5a2a1f2cbd032d": "test-4.test-4"
+        "fc519222456f530f66fc92a1ff5a2a1f2cbd032d": "test-4.test-4",
+        "cb8fb7fca13e90182a7644e5d5608b83cfc9753a": "-.Frame 1"
       }
     }
   },
@@ -290,6 +291,17 @@
       "$extensions": {
         "figma": {
           "key": "fc519222456f530f66fc92a1ff5a2a1f2cbd032d"
+        }
+      }
+    }
+  },
+  "-": {
+    "Frame 1": {
+      "type": "COMPONENT",
+      "fill": "#cf3636",
+      "$extensions": {
+        "figma": {
+          "key": "cb8fb7fca13e90182a7644e5d5608b83cfc9753a"
         }
       }
     }
