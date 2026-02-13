@@ -1,14 +1,13 @@
 {
   "$extensions": {
     "figma": {
-      "updatedAt": "2026-02-13T04:38:06Z",
+      "updatedAt": "2026-02-13T04:46:46Z",
       "keyIndex": {
         "5fa4d805d4001b2e1a28c07bb04be09bd36a866a": "Frame 1.type=success",
         "a77f0887f1c8f1ce95889ca01325b2cd1e5f5013": "Frame 1.type=error",
         "db6454acbbd342a282bf43b6c5f125853b7513cf": "Frame 1.type=default",
         "33a5db6ffa9c2b6034fbd4c6cbc6a5fd2dc93d1c": "Frame 1.label",
         "7196054c51cc2888ffbea44e73d4df75a1b452c4": "test-3.test-3",
-        "37375c3a9feb663e9eae7c7fa22fbe3e10fa1909": "test-5.test-5",
         "fc519222456f530f66fc92a1ff5a2a1f2cbd032d": "test-4.test-4",
         "cb8fb7fca13e90182a7644e5d5608b83cfc9753a": "-.Frame 1"
       }
@@ -218,51 +217,7 @@
       }
     }
   },
-  "test-5": {
-    "test-5": {
-      "type": "COMPONENT",
-      "layout": "VERTICAL",
-      "paddingLeft": 4,
-      "paddingRight": 4,
-      "paddingTop": 164,
-      "paddingBottom": 164,
-      "fill": "#ffffff",
-      "border": "#000000",
-      "children": {
-        "test-4": {
-          "type": "INSTANCE",
-          "layout": "VERTICAL",
-          "fill": "#ffffff",
-          "componentId": "2275:519",
-          "children": {
-            "test-3": {
-              "type": "INSTANCE",
-              "layout": "VERTICAL",
-              "gap": 8,
-              "paddingLeft": 8,
-              "paddingRight": 8,
-              "paddingTop": 8,
-              "paddingBottom": 8,
-              "fill": "#65636d",
-              "componentId": "2195:472",
-              "children": {
-                "test-2": {
-                  "type": "INSTANCE",
-                  "fill": "#fbebfb",
-                  "componentId": "2191:192"
-                }
-              }
-            }
-          }
-        }
-      },
-      "$extensions": {
-        "figma": {
-          "key": "37375c3a9feb663e9eae7c7fa22fbe3e10fa1909"
-        }
-      }
-    }
-  },
+  "test-5": {},
   "test-4": {
     "test-4": {
       "type": "COMPONENT",
@@ -298,7 +253,7 @@
   "-": {
     "Frame 1": {
       "type": "COMPONENT",
-      "fill": "#cf3636",
+      "fill": "#683d3d",
       "$extensions": {
         "figma": {
           "key": "cb8fb7fca13e90182a7644e5d5608b83cfc9753a"
