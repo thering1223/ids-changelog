@@ -1,14 +1,15 @@
 {
   "$extensions": {
     "figma": {
-      "updatedAt": "2026-02-23T02:20:17Z",
+      "updatedAt": "2026-02-23T03:24:15Z",
       "keyIndex": {
         "5fa4d805d4001b2e1a28c07bb04be09bd36a866a": "Frame 1.type=success",
         "a77f0887f1c8f1ce95889ca01325b2cd1e5f5013": "Frame 1.type=error",
         "db6454acbbd342a282bf43b6c5f125853b7513cf": "Frame 1.type=default",
         "33a5db6ffa9c2b6034fbd4c6cbc6a5fd2dc93d1c": "Frame 1.label",
         "cb8fb7fca13e90182a7644e5d5608b83cfc9753a": "Frame 1.Frame 1",
-        "4c738154f4dd5276ff53f0d3207f55a65294e6ae": "toast.toast"
+        "4c738154f4dd5276ff53f0d3207f55a65294e6ae": "toast.toast",
+        "00ce04c900e086c8cbc9fc0b9d62f52e06cb9c70": "checkbox + label.checkbox + label"
       }
     }
   },
@@ -235,6 +236,50 @@
       "$extensions": {
         "figma": {
           "key": "4c738154f4dd5276ff53f0d3207f55a65294e6ae"
+        }
+      }
+    }
+  },
+  "checkbox + label": {
+    "checkbox + label": {
+      "type": "COMPONENT",
+      "layout": "HORIZONTAL",
+      "gap": 4,
+      "children": {
+        "checkbox": {
+          "type": "INSTANCE",
+          "borderRadius": 4,
+          "componentId": "979:4214",
+          "children": {
+            "shape": {
+              "type": "RECTANGLE",
+              "borderRadius": 4,
+              "fill": "#1c2024"
+            },
+            "check-s": {
+              "type": "INSTANCE",
+              "componentId": "600:3386",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#ffffff"
+                }
+              }
+            }
+          }
+        },
+        "label": {
+          "type": "TEXT",
+          "fill": "#1c2024",
+          "fontSize": 14,
+          "fontWeight": 700,
+          "fontFamily": "Pretendard",
+          "color": "#1c2024"
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "00ce04c900e086c8cbc9fc0b9d62f52e06cb9c70"
         }
       }
     }
