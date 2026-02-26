@@ -4,6 +4,10 @@ on:
   repository_dispatch:
     types: [figma-publish]
 
+concurrency:
+  group: ids-deploy-report
+  cancel-in-progress: false
+
 jobs:
   generate-report:
     runs-on: ubuntu-latest
