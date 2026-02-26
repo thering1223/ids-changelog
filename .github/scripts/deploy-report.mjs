@@ -289,9 +289,9 @@ async function notifySlack(webhook, reportResult) {
   ];
 
   const sections = [
-    buildSection(`🟢 *추가 (${addedItems.length})*`, addedItems),
-    buildSection(`🟠 *수정 (${modifiedItems.length})*`, modifiedItems),
-    buildSection(`🔴 *삭제 (${deletedItems.length})*`, deletedItems),
+    buildSection(`🟢 *추가*`, addedItems),
+    buildSection(`🟠 *수정*`, modifiedItems),
+    buildSection(`🔴 *삭제*`, deletedItems),
   ].filter(Boolean);
 
   const deployer = webhook.triggered_by?.handle || "Unknown";
