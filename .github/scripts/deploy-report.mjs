@@ -258,7 +258,7 @@ async function writeGitHub(readResult, reportResult) {
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
   const branch = "main";
 
-  const { newVersion, changelogMd } = reportResult;
+  const { newVersion, changelogMd, g3Summary } = reportResult;
   const { changelogContent } = readResult;
 
   // 새 섹션을 헤더 바로 뒤에 삽입 (가장 최신 버전이 맨 위)
