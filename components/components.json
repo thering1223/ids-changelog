@@ -1,7 +1,7 @@
 {
   "$extensions": {
     "figma": {
-      "updatedAt": "2026-02-26T04:35:42Z",
+      "updatedAt": "2026-02-26T05:15:44Z",
       "keyIndex": {
         "5fa4d805d4001b2e1a28c07bb04be09bd36a866a": "Frame 1.type=success",
         "a77f0887f1c8f1ce95889ca01325b2cd1e5f5013": "Frame 1.type=error",
@@ -9,7 +9,14 @@
         "33a5db6ffa9c2b6034fbd4c6cbc6a5fd2dc93d1c": "Frame 1.label",
         "cb8fb7fca13e90182a7644e5d5608b83cfc9753a": "Frame 1.Frame 1",
         "4c738154f4dd5276ff53f0d3207f55a65294e6ae": "toast.toast",
-        "00ce04c900e086c8cbc9fc0b9d62f52e06cb9c70": "checkbox + label.checkbox + label"
+        "00ce04c900e086c8cbc9fc0b9d62f52e06cb9c70": "checkbox + label.checkbox + label",
+        "7cc0e8802b7ff5a79e9381d75335901b9c5356b0": "textField.state=filled",
+        "4310282ae3637f3fd075cd72383b37a449ad0023": "textField.state=hover",
+        "9951a373a30b20f85dce69ecba8894a21152bb94": "textField.state=focus",
+        "36cadd64020cf2495f9551a5fbce4f36a0044ea7": "textField.state=disabled",
+        "11a688914cbb93590d61f4935f45a0549fa3e745": "textField.state=enabled",
+        "15c303e8164df92f6111fbcc8957d25e9c1e933d": "textField.state=read-only",
+        "a491571d5558e61741a4744603bbeb8b40be556b": "textField.state=error"
       }
     }
   },
@@ -280,6 +287,1230 @@
       "$extensions": {
         "figma": {
           "key": "00ce04c900e086c8cbc9fc0b9d62f52e06cb9c70"
+        }
+      }
+    }
+  },
+  "textField": {
+    "state=filled": {
+      "type": "COMPONENT",
+      "layout": "VERTICAL",
+      "gap": 4,
+      "children": {
+        "label": {
+          "type": "INSTANCE",
+          "layout": "VERTICAL",
+          "componentId": "1424:2201",
+          "children": {
+            "label": {
+              "type": "FRAME",
+              "layout": "HORIZONTAL",
+              "gap": 8,
+              "children": {
+                "[flex]": {
+                  "type": "FRAME",
+                  "layout": "HORIZONTAL",
+                  "gap": 4,
+                  "children": {
+                    "label": {
+                      "type": "TEXT",
+                      "fill": "#1c2024",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#1c2024"
+                    },
+                    "*": {
+                      "type": "TEXT",
+                      "visible": false,
+                      "fill": "#ff5b1a",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#ff5b1a"
+                    },
+                    "optional": {
+                      "type": "FRAME",
+                      "layout": "HORIZONTAL",
+                      "gap": 4,
+                      "visible": false,
+                      "children": {
+                        "info": {
+                          "type": "INSTANCE",
+                          "componentId": "600:2731",
+                          "children": {
+                            "vector": {
+                              "type": "VECTOR",
+                              "fill": "#8b8d98"
+                            }
+                          }
+                        },
+                        "optional": {
+                          "type": "TEXT",
+                          "fill": "#8b8d98",
+                          "fontSize": 14,
+                          "fontWeight": 400,
+                          "fontFamily": "Pretendard",
+                          "color": "#8b8d98"
+                        }
+                      }
+                    }
+                  }
+                },
+                "n/n": {
+                  "type": "TEXT",
+                  "visible": false,
+                  "fill": "#b9bbc6",
+                  "fontSize": 13,
+                  "fontWeight": 500,
+                  "fontFamily": "Pretendard",
+                  "color": "#b9bbc6"
+                }
+              }
+            },
+            "description": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#8b8d98",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        },
+        "input": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 8,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+          "borderRadius": 8,
+          "fill": "#ffffff",
+          "border": "#00051d",
+          "componentId": "2085:397",
+          "children": {
+            "prefixIcon": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3173",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "prefixLabel": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#1c2024",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#1c2024"
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#1c2024",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#1c2024"
+            },
+            "clear": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3400",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#b9bbc6"
+                }
+              }
+            }
+          }
+        },
+        "help text": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 4,
+          "visible": false,
+          "fill": "#ffffff",
+          "componentId": "1414:1699",
+          "children": {
+            "info": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:2731",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#8b8d98",
+              "fontSize": 13,
+              "fontWeight": 500,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "7cc0e8802b7ff5a79e9381d75335901b9c5356b0"
+        }
+      }
+    },
+    "state=hover": {
+      "type": "COMPONENT",
+      "layout": "VERTICAL",
+      "gap": 4,
+      "children": {
+        "label": {
+          "type": "INSTANCE",
+          "layout": "VERTICAL",
+          "componentId": "1424:2201",
+          "children": {
+            "label": {
+              "type": "FRAME",
+              "layout": "HORIZONTAL",
+              "gap": 8,
+              "children": {
+                "[flex]": {
+                  "type": "FRAME",
+                  "layout": "HORIZONTAL",
+                  "gap": 4,
+                  "children": {
+                    "label": {
+                      "type": "TEXT",
+                      "fill": "#1c2024",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#1c2024"
+                    },
+                    "*": {
+                      "type": "TEXT",
+                      "visible": false,
+                      "fill": "#ff5b1a",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#ff5b1a"
+                    },
+                    "optional": {
+                      "type": "FRAME",
+                      "layout": "HORIZONTAL",
+                      "gap": 4,
+                      "visible": false,
+                      "children": {
+                        "info": {
+                          "type": "INSTANCE",
+                          "componentId": "600:2731",
+                          "children": {
+                            "vector": {
+                              "type": "VECTOR",
+                              "fill": "#8b8d98"
+                            }
+                          }
+                        },
+                        "optional": {
+                          "type": "TEXT",
+                          "fill": "#8b8d98",
+                          "fontSize": 14,
+                          "fontWeight": 400,
+                          "fontFamily": "Pretendard",
+                          "color": "#8b8d98"
+                        }
+                      }
+                    }
+                  }
+                },
+                "n/n": {
+                  "type": "TEXT",
+                  "visible": false,
+                  "fill": "#b9bbc6",
+                  "fontSize": 13,
+                  "fontWeight": 500,
+                  "fontFamily": "Pretendard",
+                  "color": "#b9bbc6"
+                }
+              }
+            },
+            "description": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#8b8d98",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        },
+        "input": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 8,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+          "borderRadius": 8,
+          "fill": "#ffffff",
+          "border": "#00051d",
+          "componentId": "2078:355",
+          "children": {
+            "prefixIcon": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3173",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "prefixLabel": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#1c2024",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#1c2024"
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#b9bbc6",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#b9bbc6"
+            },
+            "clear": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3400",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#b9bbc6"
+                }
+              }
+            }
+          }
+        },
+        "help text": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 4,
+          "visible": false,
+          "fill": "#ffffff",
+          "componentId": "1414:1699",
+          "children": {
+            "info": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:2731",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#8b8d98",
+              "fontSize": 13,
+              "fontWeight": 500,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "4310282ae3637f3fd075cd72383b37a449ad0023"
+        }
+      }
+    },
+    "state=focus": {
+      "type": "COMPONENT",
+      "layout": "VERTICAL",
+      "gap": 4,
+      "children": {
+        "label": {
+          "type": "INSTANCE",
+          "layout": "VERTICAL",
+          "componentId": "1424:2201",
+          "children": {
+            "label": {
+              "type": "FRAME",
+              "layout": "HORIZONTAL",
+              "gap": 8,
+              "children": {
+                "[flex]": {
+                  "type": "FRAME",
+                  "layout": "HORIZONTAL",
+                  "gap": 4,
+                  "children": {
+                    "label": {
+                      "type": "TEXT",
+                      "fill": "#1c2024",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#1c2024"
+                    },
+                    "*": {
+                      "type": "TEXT",
+                      "visible": false,
+                      "fill": "#ff5b1a",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#ff5b1a"
+                    },
+                    "optional": {
+                      "type": "FRAME",
+                      "layout": "HORIZONTAL",
+                      "gap": 4,
+                      "visible": false,
+                      "children": {
+                        "info": {
+                          "type": "INSTANCE",
+                          "componentId": "600:2731",
+                          "children": {
+                            "vector": {
+                              "type": "VECTOR",
+                              "fill": "#8b8d98"
+                            }
+                          }
+                        },
+                        "optional": {
+                          "type": "TEXT",
+                          "fill": "#8b8d98",
+                          "fontSize": 14,
+                          "fontWeight": 400,
+                          "fontFamily": "Pretendard",
+                          "color": "#8b8d98"
+                        }
+                      }
+                    }
+                  }
+                },
+                "n/n": {
+                  "type": "TEXT",
+                  "visible": false,
+                  "fill": "#b9bbc6",
+                  "fontSize": 13,
+                  "fontWeight": 500,
+                  "fontFamily": "Pretendard",
+                  "color": "#b9bbc6"
+                }
+              }
+            },
+            "description": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#8b8d98",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        },
+        "input": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 8,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+          "borderRadius": 8,
+          "fill": "#ffffff",
+          "border": "#00051d",
+          "componentId": "2078:362",
+          "children": {
+            "prefixIcon": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3173",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "prefixLabel": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#1c2024",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#1c2024"
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#b9bbc6",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#b9bbc6"
+            },
+            "clear": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3400",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#b9bbc6"
+                }
+              }
+            }
+          }
+        },
+        "help text": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 4,
+          "visible": false,
+          "fill": "#ffffff",
+          "componentId": "1414:1699",
+          "children": {
+            "info": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:2731",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#8b8d98",
+              "fontSize": 13,
+              "fontWeight": 500,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "9951a373a30b20f85dce69ecba8894a21152bb94"
+        }
+      }
+    },
+    "state=disabled": {
+      "type": "COMPONENT",
+      "layout": "VERTICAL",
+      "gap": 4,
+      "children": {
+        "label": {
+          "type": "INSTANCE",
+          "layout": "VERTICAL",
+          "componentId": "1424:2201",
+          "children": {
+            "label": {
+              "type": "FRAME",
+              "layout": "HORIZONTAL",
+              "gap": 8,
+              "children": {
+                "[flex]": {
+                  "type": "FRAME",
+                  "layout": "HORIZONTAL",
+                  "gap": 4,
+                  "children": {
+                    "label": {
+                      "type": "TEXT",
+                      "fill": "#1c2024",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#1c2024"
+                    },
+                    "*": {
+                      "type": "TEXT",
+                      "visible": false,
+                      "fill": "#ff5b1a",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#ff5b1a"
+                    },
+                    "optional": {
+                      "type": "FRAME",
+                      "layout": "HORIZONTAL",
+                      "gap": 4,
+                      "visible": false,
+                      "children": {
+                        "info": {
+                          "type": "INSTANCE",
+                          "componentId": "600:2731",
+                          "children": {
+                            "vector": {
+                              "type": "VECTOR",
+                              "fill": "#8b8d98"
+                            }
+                          }
+                        },
+                        "optional": {
+                          "type": "TEXT",
+                          "fill": "#8b8d98",
+                          "fontSize": 14,
+                          "fontWeight": 400,
+                          "fontFamily": "Pretendard",
+                          "color": "#8b8d98"
+                        }
+                      }
+                    }
+                  }
+                },
+                "n/n": {
+                  "type": "TEXT",
+                  "visible": false,
+                  "fill": "#b9bbc6",
+                  "fontSize": 13,
+                  "fontWeight": 500,
+                  "fontFamily": "Pretendard",
+                  "color": "#b9bbc6"
+                }
+              }
+            },
+            "description": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#8b8d98",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        },
+        "input": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 8,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+          "borderRadius": 8,
+          "fill": "#f0f0f3",
+          "border": "#00002f",
+          "componentId": "2078:369",
+          "children": {
+            "prefixIcon": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3173",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "prefixLabel": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#1c2024",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#1c2024"
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#b9bbc6",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#b9bbc6"
+            },
+            "clear": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3400",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#b9bbc6"
+                }
+              }
+            }
+          }
+        },
+        "help text": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 4,
+          "visible": false,
+          "fill": "#ffffff",
+          "componentId": "1414:1699",
+          "children": {
+            "info": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:2731",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#8b8d98",
+              "fontSize": 13,
+              "fontWeight": 500,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "36cadd64020cf2495f9551a5fbce4f36a0044ea7"
+        }
+      }
+    },
+    "state=enabled": {
+      "type": "COMPONENT",
+      "layout": "VERTICAL",
+      "gap": 4,
+      "children": {
+        "label": {
+          "type": "INSTANCE",
+          "layout": "VERTICAL",
+          "componentId": "1424:2201",
+          "children": {
+            "label": {
+              "type": "FRAME",
+              "layout": "HORIZONTAL",
+              "gap": 8,
+              "children": {
+                "[flex]": {
+                  "type": "FRAME",
+                  "layout": "HORIZONTAL",
+                  "gap": 4,
+                  "children": {
+                    "label": {
+                      "type": "TEXT",
+                      "fill": "#1c2024",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#1c2024"
+                    },
+                    "*": {
+                      "type": "TEXT",
+                      "visible": false,
+                      "fill": "#ff5b1a",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#ff5b1a"
+                    },
+                    "optional": {
+                      "type": "FRAME",
+                      "layout": "HORIZONTAL",
+                      "gap": 4,
+                      "visible": false,
+                      "children": {
+                        "info": {
+                          "type": "INSTANCE",
+                          "componentId": "600:2731",
+                          "children": {
+                            "vector": {
+                              "type": "VECTOR",
+                              "fill": "#8b8d98"
+                            }
+                          }
+                        },
+                        "optional": {
+                          "type": "TEXT",
+                          "fill": "#8b8d98",
+                          "fontSize": 14,
+                          "fontWeight": 400,
+                          "fontFamily": "Pretendard",
+                          "color": "#8b8d98"
+                        }
+                      }
+                    }
+                  }
+                },
+                "n/n": {
+                  "type": "TEXT",
+                  "visible": false,
+                  "fill": "#b9bbc6",
+                  "fontSize": 13,
+                  "fontWeight": 500,
+                  "fontFamily": "Pretendard",
+                  "color": "#b9bbc6"
+                }
+              }
+            },
+            "description": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#8b8d98",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        },
+        "input": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 8,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+          "borderRadius": 8,
+          "fill": "#ffffff",
+          "border": "#00002f",
+          "componentId": "1376:1507",
+          "children": {
+            "prefixIcon": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3173",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "prefixLabel": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#1c2024",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#1c2024"
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#b9bbc6",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#b9bbc6"
+            },
+            "clear": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3400",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#b9bbc6"
+                }
+              }
+            }
+          }
+        },
+        "help text": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 4,
+          "visible": false,
+          "fill": "#ffffff",
+          "componentId": "1414:1699",
+          "children": {
+            "info": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:2731",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#8b8d98",
+              "fontSize": 13,
+              "fontWeight": 500,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "11a688914cbb93590d61f4935f45a0549fa3e745"
+        }
+      }
+    },
+    "state=read-only": {
+      "type": "COMPONENT",
+      "layout": "VERTICAL",
+      "gap": 4,
+      "children": {
+        "label": {
+          "type": "INSTANCE",
+          "layout": "VERTICAL",
+          "componentId": "1424:2201",
+          "children": {
+            "label": {
+              "type": "FRAME",
+              "layout": "HORIZONTAL",
+              "gap": 8,
+              "children": {
+                "[flex]": {
+                  "type": "FRAME",
+                  "layout": "HORIZONTAL",
+                  "gap": 4,
+                  "children": {
+                    "label": {
+                      "type": "TEXT",
+                      "fill": "#1c2024",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#1c2024"
+                    },
+                    "*": {
+                      "type": "TEXT",
+                      "visible": false,
+                      "fill": "#ff5b1a",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#ff5b1a"
+                    },
+                    "optional": {
+                      "type": "FRAME",
+                      "layout": "HORIZONTAL",
+                      "gap": 4,
+                      "visible": false,
+                      "children": {
+                        "info": {
+                          "type": "INSTANCE",
+                          "componentId": "600:2731",
+                          "children": {
+                            "vector": {
+                              "type": "VECTOR",
+                              "fill": "#8b8d98"
+                            }
+                          }
+                        },
+                        "optional": {
+                          "type": "TEXT",
+                          "fill": "#8b8d98",
+                          "fontSize": 14,
+                          "fontWeight": 400,
+                          "fontFamily": "Pretendard",
+                          "color": "#8b8d98"
+                        }
+                      }
+                    }
+                  }
+                },
+                "n/n": {
+                  "type": "TEXT",
+                  "visible": false,
+                  "fill": "#b9bbc6",
+                  "fontSize": 13,
+                  "fontWeight": 500,
+                  "fontFamily": "Pretendard",
+                  "color": "#b9bbc6"
+                }
+              }
+            },
+            "description": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#8b8d98",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        },
+        "input": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 8,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+          "borderRadius": 8,
+          "fill": "#f0f0f3",
+          "border": "#00002f",
+          "componentId": "2078:376",
+          "children": {
+            "prefixIcon": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3173",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "prefixLabel": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#1c2024",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#1c2024"
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#1c2024",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#1c2024"
+            },
+            "clear": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3400",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#b9bbc6"
+                }
+              }
+            }
+          }
+        },
+        "help text": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 4,
+          "visible": false,
+          "fill": "#ffffff",
+          "componentId": "1414:1699",
+          "children": {
+            "info": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:2731",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#8b8d98",
+              "fontSize": 13,
+              "fontWeight": 500,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "15c303e8164df92f6111fbcc8957d25e9c1e933d"
+        }
+      }
+    },
+    "state=error": {
+      "type": "COMPONENT",
+      "layout": "VERTICAL",
+      "gap": 4,
+      "children": {
+        "label": {
+          "type": "INSTANCE",
+          "layout": "VERTICAL",
+          "componentId": "1424:2201",
+          "children": {
+            "label": {
+              "type": "FRAME",
+              "layout": "HORIZONTAL",
+              "gap": 8,
+              "children": {
+                "[flex]": {
+                  "type": "FRAME",
+                  "layout": "HORIZONTAL",
+                  "gap": 4,
+                  "children": {
+                    "label": {
+                      "type": "TEXT",
+                      "fill": "#1c2024",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#1c2024"
+                    },
+                    "*": {
+                      "type": "TEXT",
+                      "visible": false,
+                      "fill": "#ff5b1a",
+                      "fontSize": 14,
+                      "fontWeight": 700,
+                      "fontFamily": "Pretendard",
+                      "color": "#ff5b1a"
+                    },
+                    "optional": {
+                      "type": "FRAME",
+                      "layout": "HORIZONTAL",
+                      "gap": 4,
+                      "visible": false,
+                      "children": {
+                        "info": {
+                          "type": "INSTANCE",
+                          "componentId": "600:2731",
+                          "children": {
+                            "vector": {
+                              "type": "VECTOR",
+                              "fill": "#8b8d98"
+                            }
+                          }
+                        },
+                        "optional": {
+                          "type": "TEXT",
+                          "fill": "#8b8d98",
+                          "fontSize": 14,
+                          "fontWeight": 400,
+                          "fontFamily": "Pretendard",
+                          "color": "#8b8d98"
+                        }
+                      }
+                    }
+                  }
+                },
+                "n/n": {
+                  "type": "TEXT",
+                  "visible": false,
+                  "fill": "#b9bbc6",
+                  "fontSize": 13,
+                  "fontWeight": 500,
+                  "fontFamily": "Pretendard",
+                  "color": "#b9bbc6"
+                }
+              }
+            },
+            "description": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#8b8d98",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#8b8d98"
+            }
+          }
+        },
+        "input": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 8,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+          "borderRadius": 8,
+          "fill": "#ffffff",
+          "border": "#e5484d",
+          "componentId": "2078:383",
+          "children": {
+            "prefixIcon": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3173",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#8b8d98"
+                }
+              }
+            },
+            "prefixLabel": {
+              "type": "TEXT",
+              "visible": false,
+              "fill": "#1c2024",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#1c2024"
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#e5484d",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "fontFamily": "Pretendard",
+              "color": "#e5484d"
+            },
+            "clear": {
+              "type": "INSTANCE",
+              "visible": false,
+              "componentId": "600:3400",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#b9bbc6"
+                }
+              }
+            }
+          }
+        },
+        "help text": {
+          "type": "INSTANCE",
+          "layout": "HORIZONTAL",
+          "gap": 4,
+          "componentId": "1421:1726",
+          "children": {
+            "error-solid": {
+              "type": "INSTANCE",
+              "componentId": "990:5085",
+              "children": {
+                "vector": {
+                  "type": "VECTOR",
+                  "fill": "#e5484d"
+                }
+              }
+            },
+            "text": {
+              "type": "TEXT",
+              "fill": "#e5484d",
+              "fontSize": 13,
+              "fontWeight": 500,
+              "fontFamily": "Pretendard",
+              "color": "#e5484d"
+            }
+          }
+        }
+      },
+      "$extensions": {
+        "figma": {
+          "key": "a491571d5558e61741a4744603bbeb8b40be556b"
         }
       }
     }
