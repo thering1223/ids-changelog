@@ -258,7 +258,8 @@ async function diffAndReport(webhook, readResult, fetchResult) {
       });
       continue;
     }
-    // 이름 동일 → 거짓 양성 스킵
+    // 이름 동일 → 값 변경 (Pro 플랜 한계로 값 확인 불가)
+    variablesDiff.push({ status: "modified", name: v.name, key: v.key, valueUnknown: true });
   }
 
   // ==============================
