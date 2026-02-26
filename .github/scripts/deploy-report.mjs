@@ -13,6 +13,12 @@ async function main() {
   if (!webhook) return;
 
   const readResult = readGitHub();
+
+  if (readResult.lastProcessedAt === webhook.timestamp) {
+    console.log(`Already processed timestamp ${webhook.timestamp}, skipping`);
+    return;
+  }
+
   const fetchResult = await fetchFigma(webhook);
   const diffResult = await diffAndReport(webhook, readResult, fetchResult);
   await writeGitHub(readResult, diffResult);
@@ -55,8 +61,9 @@ function readGitHub() {
     prompts.g3 = fs.readFileSync(path.join(ROOT, "prompts/g3.txt"), "utf-8");
   } catch (e) { /* 없으면 빈 기본값 사용 */ }
 
+  const lastProcessedAt = components?.$extensions?.figma?.updatedAt || null;
   console.log(`Current version: ${currentVersion}`);
-  return { tokens, components, changelogContent, currentVersion, prompts };
+  return { tokens, components, changelogContent, currentVersion, prompts, lastProcessedAt };
 }
 
 // ============================================================
