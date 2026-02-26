@@ -42,7 +42,7 @@ function parseWebhook() {
 // ============================================================
 function readGitHub() {
   const changelogContent = fs.readFileSync(path.join(ROOT, "changelog/CHANGELOG.md"), "utf-8");
-  const versionMatch = changelogContent.match(/\[v(\d+\.\d+\.\d+)\]/);
+  const versionMatch = changelogContent.match(/^## v(\d+\.\d+\.\d+)/m);
   const currentVersion = versionMatch ? versionMatch[1] : "0.0.0";
 
   let g3Prompt = "";
@@ -198,18 +198,17 @@ async function buildReport(webhook, readResult, fetchResult) {
   }
   console.log(`G3: ${g3Summary}`);
 
-  // --- Changelog Markdown ---
+  // --- Changelog Section ---
   const now = new Date(webhook.timestamp || Date.now());
   const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
-  const dateStr = kst.toISOString().replace("T", " ").slice(0, 19) + " (KST)";
+  const dateStr = kst.toISOString().slice(0, 10);
   const deployer = webhook.triggered_by?.handle || "Unknown";
   const email = webhook.triggered_by?.email || "";
 
-  let md = `# v${newVersion}\n\n`;
-  md += `**배포자**: [${deployer}](mailto:${email})  \n`;
-  md += `**배포 시각**: ${dateStr}  \n`;
-  if (webhook.description) md += `**설명**: ${webhook.description}  \n`;
-  md += `\n---\n\n`;
+  let md = `## v${newVersion}\n`;
+  md += `*${dateStr} · [${deployer}](mailto:${email})*\n\n`;
+  if (webhook.description) md += `💬 ${webhook.description}\n\n`;
+  md += `${g3Summary}\n\n`;
 
   // Variables
   if (variablesAdded.length > 0 || variablesDeleted.length > 0 || variablesModified.length > 0) {
@@ -278,14 +277,13 @@ async function writeGitHub(readResult, reportResult) {
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
   const branch = "main";
 
-  const { newVersion, changelogMd, g3Summary } = reportResult;
+  const { newVersion, changelogMd } = reportResult;
   const { changelogContent } = readResult;
 
-  const today = new Date().toISOString().split("T")[0];
-  const newRow = `| [v${newVersion}](./v${newVersion}.md) | ${today} | ${g3Summary} |`;
+  // 새 섹션을 헤더 바로 뒤에 삽입 (가장 최신 버전이 맨 위)
   const updatedChangelog = changelogContent.replace(
-    /(^\|.*\|.*\|.*\|\n\|[-\s|]+\|\n)/m,
-    `$1${newRow}\n`
+    /^(# IDS 2\.0 Changelog\n)/m,
+    `$1\n---\n\n${changelogMd.trimEnd()}\n`
   );
 
   const { data: ref } = await octokit.git.getRef({ owner, repo, ref: `heads/${branch}` });
@@ -293,7 +291,6 @@ async function writeGitHub(readResult, reportResult) {
   const { data: baseCommit } = await octokit.git.getCommit({ owner, repo, commit_sha: latestCommitSha });
 
   const files = [
-    { path: `changelog/v${newVersion}.md`, content: changelogMd },
     { path: "changelog/CHANGELOG.md", content: updatedChangelog },
   ];
 
@@ -336,7 +333,7 @@ async function notifySlack(webhook, reportResult) {
   const email = webhook.triggered_by?.email || "";
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
-  const changelogUrl = `https://github.com/${owner}/${repo}/blob/main/changelog/v${newVersion}.md`;
+  const changelogUrl = `https://github.com/${owner}/${repo}/blob/main/changelog/CHANGELOG.md`;
   const figmaBase = `https://www.figma.com/file/${fileKey}`;
   const slackLink = (name, nodeId) => nodeId ? `<${figmaBase}?node-id=${nodeId}|${name}>` : name;
 
