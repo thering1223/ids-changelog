@@ -2,6 +2,7 @@
 
 | 버전 | 날짜 | 요약 |
 |------|------|------|
+| [v0.27.0](./v0.27.0.md) | 2026-02-26 | variables 컬렉션에서 `test/migration-test` 변수가 삭제되었으며, styles 및 components는 변경이 없습니다. |
 | [v0.26.0](./v0.26.0.md) | 2026-02-26 | `label=text` 컴포넌트가 default, brand, neutral, neutral weak type과 default, hover, focus, disabled state, 그리고 xs, s, m, l size 등 다양한 조합으로 추가되었습니다. |
 | [v0.25.0](./v0.25.0.md) | 2026-02-26 | Variables와 Styles에는 변경 사항이 없으며, Components 컬렉션에 state=filled, state=hover, state=focus, state=disabled, state=enabled, state=read-only, state=error 상태가 추가되었습니다. |
 | [v0.24.0](./v0.24.0.md) | 2026-02-26 | `spacing` 컬렉션에 `spacing-12` 변수가 추가되었습니다. |
