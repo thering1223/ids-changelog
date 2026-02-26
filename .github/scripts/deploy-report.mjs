@@ -296,10 +296,12 @@ async function notifySlack(webhook, reportResult) {
 
   const deployer = webhook.triggered_by?.handle || "Unknown";
   const versionLink = `<${changelogUrl}|${newVersion}>`;
-  const bodyText = [`*${versionLink}* · ${deployer}`, ...sections].join("\n\n").trim();
+  const itemsText = sections.join("\n\n").trim();
 
   const blocks = [
-    { type: "section", text: { type: "mrkdwn", text: bodyText || `*${versionLink}*\n변경 사항 없음` } },
+    { type: "section", text: { type: "mrkdwn", text: `*${versionLink}* · ${deployer}` } },
+    { type: "divider" },
+    { type: "section", text: { type: "mrkdwn", text: itemsText || "변경 사항 없음" } },
   ];
 
   const slackRes = await fetch(process.env.SLACK_WEBHOOK_URL, {
