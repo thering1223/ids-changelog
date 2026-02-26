@@ -218,7 +218,7 @@ async function buildReport(webhook, readResult, fetchResult) {
 
   // 수정
   const modifiedLines = [
-    ...(variablesModified.length > 0 ? [`- ⚠️ 수정된 변수 있음 (${variablesModified.length}개 미확인)`] : []),
+    ...(variablesModified.length > 0 ? [`- 수정된 변수 있음 (${variablesModified.length}개 미확인)`] : []),
     ...stylesModified.map((s) => `- ${mdLink(s.name, s.nodeId)}`),
     ...groupedModified.map((c) => `- ${mdLink(c.setName, c.nodeId)}${c.variantCount > 1 ? ` *(${c.variantCount})*` : ""}`),
   ];
@@ -330,7 +330,7 @@ async function notifySlack(webhook, reportResult) {
     ...groupedAdded.map((c) => `${slackLink(c.setName, c.nodeId)}${c.variantCount > 1 ? ` *(${c.variantCount})*` : ""}`),
   ];
   const modifiedItems = [
-    ...(variablesModified.length > 0 ? [`⚠️ 수정된 변수 ${variablesModified.length}개 (미확인)`] : []),
+    ...(variablesModified.length > 0 ? [`수정된 변수 ${variablesModified.length}개 (미확인)`] : []),
     ...stylesModified.map((s) => slackLink(s.name, s.nodeId)),
     ...groupedModified.map((c) => `${slackLink(c.setName, c.nodeId)}${c.variantCount > 1 ? ` *(${c.variantCount})*` : ""}`),
   ];
@@ -341,17 +341,16 @@ async function notifySlack(webhook, reportResult) {
   ];
 
   const sections = [
-    buildSection(`🟢 *추가 (${addedItems.length})*`, addedItems),
-    buildSection(`🟠 *수정 (${modifiedItems.length})*`, modifiedItems),
-    buildSection(`🔴 *삭제 (${deletedItems.length})*`, deletedItems),
+    buildSection(`*추가 (${addedItems.length})*`, addedItems),
+    buildSection(`*수정 (${modifiedItems.length})*`, modifiedItems),
+    buildSection(`*삭제 (${deletedItems.length})*`, deletedItems),
   ].filter(Boolean);
 
-  const bodyText = [`*${newVersion}*\n${g3Summary}`, ...sections].join("\n\n").trim();
+  const versionLink = `<${changelogUrl}|${newVersion}>`;
+  const bodyText = [`*${versionLink}*\n${g3Summary}`, ...sections].join("\n\n").trim();
 
   const blocks = [
-    { type: "section", text: { type: "mrkdwn", text: bodyText || `*${newVersion}*\n변경 사항 없음` } },
-    { type: "divider" },
-    { type: "section", text: { type: "mrkdwn", text: `<${changelogUrl}|Changelog 보기 →>` } },
+    { type: "section", text: { type: "mrkdwn", text: bodyText || `*${versionLink}*\n변경 사항 없음` } },
   ];
 
   const slackRes = await fetch(process.env.SLACK_WEBHOOK_URL, {
