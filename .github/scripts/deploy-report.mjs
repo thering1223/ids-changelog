@@ -294,8 +294,9 @@ async function notifySlack(webhook, reportResult) {
     buildSection(`🔴 *삭제 (${deletedItems.length})*`, deletedItems),
   ].filter(Boolean);
 
+  const deployer = webhook.triggered_by?.handle || "Unknown";
   const versionLink = `<${changelogUrl}|${newVersion}>`;
-  const bodyText = [`*${versionLink}*`, ...sections].join("\n\n").trim();
+  const bodyText = [`*${versionLink}* · ${deployer}`, ...sections].join("\n\n").trim();
 
   const blocks = [
     { type: "section", text: { type: "mrkdwn", text: bodyText || `*${versionLink}*\n변경 사항 없음` } },
