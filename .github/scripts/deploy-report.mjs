@@ -764,7 +764,11 @@ async function notifySlack(webhook, diffResult) {
   const modified = allDiffs.filter((d) => d.status === "modified");
   const deleted = allDiffs.filter((d) => d.status === "deleted");
 
-  const formatList = (items, withLink) => items.map((d) => `• ${withLink ? figmaLink(d.name, d.nodeId) : d.name}`).join("\n");
+  const MAX_ITEMS = 20;
+  const formatList = (items, withLink) => {
+    const shown = items.slice(0, MAX_ITEMS).map((d) => `• ${withLink ? figmaLink(d.name, d.nodeId) : d.name}`).join("\n");
+    return items.length > MAX_ITEMS ? `${shown}\n• _...외 ${items.length - MAX_ITEMS}건 (Changelog 참고)_` : shown;
+  };
 
   let body = `*v${newVersion}*`;
   if (added.length > 0) body += `\n\n🟢 *추가 (${added.length})*\n${formatList(added, true)}`;
