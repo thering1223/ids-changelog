@@ -1,4 +1,3 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Octokit } from "@octokit/rest";
 import fs from "fs";
 import path from "path";
@@ -32,26 +31,20 @@ function parseWebhook() {
     console.log("Invalid passcode, skipping");
     return null;
   }
-  // Pipedream 10개 프로퍼티 제한 우회: changes 객체 언팩
   const { changes, ...rest } = raw;
   return { ...rest, ...(changes || {}) };
 }
 
 // ============================================================
-// 2. readGitHub (changelog + g3 prompt only)
+// 2. readGitHub
 // ============================================================
 function readGitHub() {
   const changelogContent = fs.readFileSync(path.join(ROOT, "changelog/CHANGELOG.md"), "utf-8");
   const versionMatch = changelogContent.match(/^## (\d+\.\d+\.\d+)/m);
   const currentVersion = versionMatch ? versionMatch[1] : "0.0.0";
 
-  let g3Prompt = "";
-  try {
-    g3Prompt = fs.readFileSync(path.join(ROOT, "prompts/g3.txt"), "utf-8");
-  } catch (e) { /* optional */ }
-
   console.log(`Current version: ${currentVersion}`);
-  return { changelogContent, currentVersion, g3Prompt };
+  return { changelogContent, currentVersion };
 }
 
 // ============================================================
@@ -97,8 +90,8 @@ async function fetchFigma(webhook) {
 // ============================================================
 // 4. buildReport
 // ============================================================
-async function buildReport(webhook, readResult, fetchResult) {
-  const { currentVersion, g3Prompt } = readResult;
+function buildReport(webhook, readResult, fetchResult) {
+  const { currentVersion } = readResult;
   const { componentMetas, styleMetas } = fetchResult;
 
   const figmaBase = `https://www.figma.com/file/${webhook.file_key}`;
@@ -112,7 +105,7 @@ async function buildReport(webhook, readResult, fetchResult) {
   const variablesDeleted = webhook.deleted_variables || [];
   const variablesModified = webhook.modified_variables || [];
 
-  // --- Styles (enrich with nodeId) ---
+  // --- Styles ---
   const stylesAdded = (webhook.created_styles || []).map((s) => ({
     ...s, nodeId: getStyleMeta(s.key)?.node_id,
   }));
@@ -121,7 +114,7 @@ async function buildReport(webhook, readResult, fetchResult) {
     ...s, nodeId: getStyleMeta(s.key)?.node_id,
   }));
 
-  // --- Components (enrich with nodeId + setName) ---
+  // --- Components ---
   const enrichComp = (c) => {
     const meta = getCompMeta(c.key);
     return {
@@ -137,7 +130,6 @@ async function buildReport(webhook, readResult, fetchResult) {
   const componentsDeleted = (webhook.deleted_components || []).map((c) => ({ ...c, setName: c.name }));
   const componentsModified = (webhook.modified_components || []).map(enrichComp);
 
-  // Group by setName
   const groupBySet = (items) =>
     Object.values(
       items.reduce((acc, c) => {
@@ -168,47 +160,13 @@ async function buildReport(webhook, readResult, fetchResult) {
   }
   console.log(`New version: ${newVersion} (added=${hasAdded}, deleted=${hasDeleted})`);
 
-  // --- Gemini G3 ---
-  const varSummary = [
-    ...variablesAdded.map((v) => `추가 ${v.name}`),
-    ...variablesDeleted.map((v) => `삭제 ${v.name}`),
-    ...(variablesModified.length > 0 ? [`수정 ${variablesModified.length}개(미확인)`] : []),
-  ].join(", ") || "없음";
-
-  const styleSummary = [
-    ...stylesAdded.map((s) => `추가 ${s.name}`),
-    ...stylesModified.map((s) => `수정 ${s.name}`),
-    ...stylesDeleted.map((s) => `삭제 ${s.name}`),
-  ].join(", ") || "없음";
-
-  const compSummary = [
-    ...componentsAdded.map((c) => `추가 ${c.name}`),
-    ...componentsModified.map((c) => `수정 ${c.name}`),
-    ...componentsDeleted.map((c) => `삭제 ${c.name}`),
-  ].join(", ") || "없음";
-
-  let g3Summary = "변경 사항 없음";
-  if (g3Prompt && (varSummary !== "없음" || styleSummary !== "없음" || compSummary !== "없음")) {
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-    const fillPrompt = (t, v) => t.replace(/\{\{(\w+)\}\}/g, (_, k) => v[k] ?? "");
-    const prompt = fillPrompt(g3Prompt, { variables: varSummary, styles: styleSummary, components: compSummary });
-    const res = await model.generateContent(prompt);
-    g3Summary = res.response.text().trim();
-  }
-  console.log(`G3: ${g3Summary}`);
-
   // --- Changelog Section ---
   const now = new Date(webhook.timestamp || Date.now());
   const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
   const dateStr = kst.toISOString().slice(0, 10);
-  const deployer = webhook.triggered_by?.handle || "Unknown";
-  const email = webhook.triggered_by?.email || "";
 
   let md = `## ${newVersion} - ${dateStr}\n\n`;
-  md += `${g3Summary}\n\n`;
 
-  // 추가
   const addedLines = [
     ...variablesAdded.map((v) => `- ${v.name}`),
     ...stylesAdded.map((s) => `- ${mdLink(s.name, s.nodeId)}`),
@@ -216,7 +174,6 @@ async function buildReport(webhook, readResult, fetchResult) {
   ];
   if (addedLines.length > 0) md += `### 추가\n${addedLines.join("\n")}\n\n`;
 
-  // 수정
   const modifiedLines = [
     ...(variablesModified.length > 0 ? [`- 수정된 변수 있음 (${variablesModified.length}개 미확인)`] : []),
     ...stylesModified.map((s) => `- ${mdLink(s.name, s.nodeId)}`),
@@ -224,7 +181,6 @@ async function buildReport(webhook, readResult, fetchResult) {
   ];
   if (modifiedLines.length > 0) md += `### 수정\n${modifiedLines.join("\n")}\n\n`;
 
-  // 삭제
   const deletedLines = [
     ...variablesDeleted.map((v) => `- ${v.name}`),
     ...stylesDeleted.map((s) => `- ${s.name}`),
@@ -235,7 +191,6 @@ async function buildReport(webhook, readResult, fetchResult) {
   return {
     newVersion,
     changelogMd: md,
-    g3Summary,
     variablesAdded,
     variablesDeleted,
     variablesModified,
@@ -249,17 +204,16 @@ async function buildReport(webhook, readResult, fetchResult) {
 }
 
 // ============================================================
-// 5. writeGitHub (changelog files only)
+// 5. writeGitHub
 // ============================================================
 async function writeGitHub(readResult, reportResult) {
   const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
   const branch = "main";
 
-  const { newVersion, changelogMd, g3Summary } = reportResult;
+  const { newVersion, changelogMd } = reportResult;
   const { changelogContent } = readResult;
 
-  // 가장 최신 버전을 맨 위에 삽입
   const firstVersionIdx = changelogContent.search(/^## \d/m);
   const updatedChangelog = firstVersionIdx !== -1
     ? changelogContent.slice(0, firstVersionIdx) + changelogMd + changelogContent.slice(firstVersionIdx)
@@ -269,31 +223,27 @@ async function writeGitHub(readResult, reportResult) {
   const latestCommitSha = ref.object.sha;
   const { data: baseCommit } = await octokit.git.getCommit({ owner, repo, commit_sha: latestCommitSha });
 
-  const files = [
-    { path: "changelog/CHANGELOG.md", content: updatedChangelog },
-  ];
-
-  const blobs = await Promise.all(
-    files.map((f) =>
-      octokit.git.createBlob({ owner, repo, content: Buffer.from(f.content).toString("base64"), encoding: "base64" })
-    )
-  );
+  const { data: blob } = await octokit.git.createBlob({
+    owner, repo,
+    content: Buffer.from(updatedChangelog).toString("base64"),
+    encoding: "base64",
+  });
 
   const { data: tree } = await octokit.git.createTree({
     owner, repo,
     base_tree: baseCommit.tree.sha,
-    tree: files.map((f, i) => ({ path: f.path, mode: "100644", type: "blob", sha: blobs[i].data.sha })),
+    tree: [{ path: "changelog/CHANGELOG.md", mode: "100644", type: "blob", sha: blob.sha }],
   });
 
   const { data: commit } = await octokit.git.createCommit({
     owner, repo,
-    message: `${newVersion}: ${g3Summary}`,
+    message: newVersion,
     tree: tree.sha,
     parents: [latestCommitSha],
   });
 
   await octokit.git.updateRef({ owner, repo, ref: `heads/${branch}`, sha: commit.sha });
-  console.log(`Committed v${newVersion}: ${commit.sha}`);
+  console.log(`Committed ${newVersion}: ${commit.sha}`);
 }
 
 // ============================================================
@@ -301,15 +251,13 @@ async function writeGitHub(readResult, reportResult) {
 // ============================================================
 async function notifySlack(webhook, reportResult) {
   const {
-    newVersion, g3Summary,
+    newVersion,
     variablesAdded, variablesDeleted, variablesModified,
     stylesAdded, stylesDeleted, stylesModified,
     groupedAdded, groupedDeleted, groupedModified,
   } = reportResult;
 
   const fileKey = webhook.file_key;
-  const deployer = webhook.triggered_by?.handle || "Unknown";
-  const email = webhook.triggered_by?.email || "";
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
   const changelogUrl = `https://github.com/${owner}/${repo}/blob/main/changelog/CHANGELOG.md`;
@@ -347,7 +295,7 @@ async function notifySlack(webhook, reportResult) {
   ].filter(Boolean);
 
   const versionLink = `<${changelogUrl}|${newVersion}>`;
-  const bodyText = [`*${versionLink}*\n${g3Summary}`, ...sections].join("\n\n").trim();
+  const bodyText = [`*${versionLink}*`, ...sections].join("\n\n").trim();
 
   const blocks = [
     { type: "section", text: { type: "mrkdwn", text: bodyText || `*${versionLink}*\n변경 사항 없음` } },
