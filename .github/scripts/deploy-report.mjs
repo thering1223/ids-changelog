@@ -42,7 +42,7 @@ function parseWebhook() {
 // ============================================================
 function readGitHub() {
   const changelogContent = fs.readFileSync(path.join(ROOT, "changelog/CHANGELOG.md"), "utf-8");
-  const versionMatch = changelogContent.match(/^\[v(\d+\.\d+\.\d+)\]/m);
+  const versionMatch = changelogContent.match(/^## (\d+\.\d+\.\d+)/m);
   const currentVersion = versionMatch ? versionMatch[1] : "0.0.0";
 
   let g3Prompt = "";
@@ -205,8 +205,7 @@ async function buildReport(webhook, readResult, fetchResult) {
   const deployer = webhook.triggered_by?.handle || "Unknown";
   const email = webhook.triggered_by?.email || "";
 
-  let md = `[v${newVersion}] - ${dateStr}\n`;
-  md += `*[${deployer}](mailto:${email})*\n\n`;
+  let md = `## ${newVersion} - ${dateStr}\n\n`;
   md += `${g3Summary}\n\n`;
 
   // 추가
@@ -215,7 +214,7 @@ async function buildReport(webhook, readResult, fetchResult) {
     ...stylesAdded.map((s) => `- ${mdLink(s.name, s.nodeId)}`),
     ...groupedAdded.map((c) => `- ${mdLink(c.setName, c.nodeId)}${c.variantCount > 1 ? ` *(${c.variantCount})*` : ""}`),
   ];
-  if (addedLines.length > 0) md += `추가\n${addedLines.join("\n")}\n\n`;
+  if (addedLines.length > 0) md += `### 추가\n${addedLines.join("\n")}\n\n`;
 
   // 수정
   const modifiedLines = [
@@ -223,7 +222,7 @@ async function buildReport(webhook, readResult, fetchResult) {
     ...stylesModified.map((s) => `- ${mdLink(s.name, s.nodeId)}`),
     ...groupedModified.map((c) => `- ${mdLink(c.setName, c.nodeId)}${c.variantCount > 1 ? ` *(${c.variantCount})*` : ""}`),
   ];
-  if (modifiedLines.length > 0) md += `수정\n${modifiedLines.join("\n")}\n\n`;
+  if (modifiedLines.length > 0) md += `### 수정\n${modifiedLines.join("\n")}\n\n`;
 
   // 삭제
   const deletedLines = [
@@ -231,7 +230,7 @@ async function buildReport(webhook, readResult, fetchResult) {
     ...stylesDeleted.map((s) => `- ${s.name}`),
     ...groupedDeleted.map((c) => `- ${c.setName}${c.variantCount > 1 ? ` *(${c.variantCount})*` : ""}`),
   ];
-  if (deletedLines.length > 0) md += `삭제\n${deletedLines.join("\n")}\n\n`;
+  if (deletedLines.length > 0) md += `### 삭제\n${deletedLines.join("\n")}\n\n`;
 
   return {
     newVersion,
@@ -260,11 +259,11 @@ async function writeGitHub(readResult, reportResult) {
   const { newVersion, changelogMd, g3Summary } = reportResult;
   const { changelogContent } = readResult;
 
-  // 새 섹션을 헤더 바로 뒤에 삽입 (가장 최신 버전이 맨 위)
-  const updatedChangelog = changelogContent.replace(
-    /^(# IDS 2\.0 Changelog\n)/m,
-    `$1\n---\n\n${changelogMd.trimEnd()}\n`
-  );
+  // 가장 최신 버전을 맨 위에 삽입
+  const firstVersionIdx = changelogContent.search(/^## \d/m);
+  const updatedChangelog = firstVersionIdx !== -1
+    ? changelogContent.slice(0, firstVersionIdx) + changelogMd + changelogContent.slice(firstVersionIdx)
+    : changelogContent.trimEnd() + "\n\n" + changelogMd;
 
   const { data: ref } = await octokit.git.getRef({ owner, repo, ref: `heads/${branch}` });
   const latestCommitSha = ref.object.sha;
@@ -288,7 +287,7 @@ async function writeGitHub(readResult, reportResult) {
 
   const { data: commit } = await octokit.git.createCommit({
     owner, repo,
-    message: `v${newVersion}: ${g3Summary}`,
+    message: `${newVersion}: ${g3Summary}`,
     tree: tree.sha,
     parents: [latestCommitSha],
   });
@@ -347,12 +346,10 @@ async function notifySlack(webhook, reportResult) {
     buildSection(`🔴 *삭제 (${deletedItems.length})*`, deletedItems),
   ].filter(Boolean);
 
-  const bodyText = [`*v${newVersion}*\n${g3Summary}`, ...sections].join("\n\n").trim();
+  const bodyText = [`*${newVersion}*\n${g3Summary}`, ...sections].join("\n\n").trim();
 
   const blocks = [
-    { type: "section", text: { type: "mrkdwn", text: `updated: <mailto:${email}|${deployer}>` } },
-    { type: "divider" },
-    { type: "section", text: { type: "mrkdwn", text: bodyText || `*v${newVersion}*\n변경 사항 없음` } },
+    { type: "section", text: { type: "mrkdwn", text: bodyText || `*${newVersion}*\n변경 사항 없음` } },
     { type: "divider" },
     { type: "section", text: { type: "mrkdwn", text: `<${changelogUrl}|Changelog 보기 →>` } },
   ];

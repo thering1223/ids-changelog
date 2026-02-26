@@ -1,12 +1,7 @@
 # IDS 2.0 Changelog
 
----
-[v0.1.0] - 2026-02-26
-*[juneui](mailto:juneui@ab-z.com)*
+All notable changes to this project will be documented in this file.
 
-💬 포맷 변경 테스트
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-spacing 컬렉션에 spacing/spacing-new 변수가 추가되었습니다.
-
-추가
-- spacing/spacing-new
