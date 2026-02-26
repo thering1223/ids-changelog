@@ -23,16 +23,18 @@ async function main() {
 // 1. parseWebhook
 // ============================================================
 function parseWebhook() {
-  const payload = JSON.parse(process.env.WEBHOOK_PAYLOAD);
-  if (payload.event_type === "PING") {
+  const raw = JSON.parse(process.env.WEBHOOK_PAYLOAD);
+  if (raw.event_type === "PING") {
     console.log("PING received, skipping");
     return null;
   }
-  if (payload.passcode !== "ids-changelog-2026") {
+  if (raw.passcode !== "ids-changelog-2026") {
     console.log("Invalid passcode, skipping");
     return null;
   }
-  return payload;
+  // Pipedream 10개 프로퍼티 제한 우회: changes 객체 언팩
+  const { changes, ...rest } = raw;
+  return { ...rest, ...(changes || {}) };
 }
 
 // ============================================================
