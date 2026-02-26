@@ -2,6 +2,7 @@
 
 | 버전 | 날짜 | 요약 |
 |------|------|------|
+| [v0.30.1](./v0.30.1.md) | 2026-02-26 | components 컬렉션의 `state=error`가 수정되었습니다. |
 | [v0.30.0](./v0.30.0.md) | 2026-02-26 | Components 컬렉션에 `filled`, `hover`, `focus`, `disabled`, `enabled`, `read-only`, `error` 상태가 추가되었습니다. |
 | [v0.29.0](./v0.29.0.md) | 2026-02-26 | components에 state=hover, state=filled, state=focus, state=disabled, state=read-only, state=error가 추가되었고, state=enabled가 수정되었습니다. |
 | [v0.28.0](./v0.28.0.md) | 2026-02-26 | 변수 `test/migration-test`가 삭제되었습니다. |
