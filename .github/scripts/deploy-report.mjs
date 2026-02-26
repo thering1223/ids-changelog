@@ -784,11 +784,15 @@ async function notifySlack(webhook, diffResult) {
     blocks.push({ type: "section", text: { type: "mrkdwn", text: `⚠️  *미확인 변수값이 있습니다. 스냅샷 갱신이 필요합니다.*\n${unknownVarNames.join(", ")}` } });
   }
 
-  await fetch(process.env.SLACK_WEBHOOK_URL, {
+  const slackRes = await fetch(process.env.SLACK_WEBHOOK_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ blocks }),
   });
+  if (!slackRes.ok) {
+    const text = await slackRes.text();
+    throw new Error(`Slack notification failed: ${slackRes.status} ${text}`);
+  }
   console.log("Slack notification sent");
 }
 
