@@ -289,9 +289,9 @@ async function notifySlack(webhook, reportResult) {
   ];
 
   const sections = [
-    buildSection(`*추가 (${addedItems.length})*`, addedItems),
-    buildSection(`*수정 (${modifiedItems.length})*`, modifiedItems),
-    buildSection(`*삭제 (${deletedItems.length})*`, deletedItems),
+    buildSection(`🟢 *추가 (${addedItems.length})*`, addedItems),
+    buildSection(`🟠 *수정 (${modifiedItems.length})*`, modifiedItems),
+    buildSection(`🔴 *삭제 (${deletedItems.length})*`, deletedItems),
   ].filter(Boolean);
 
   const versionLink = `<${changelogUrl}|${newVersion}>`;
