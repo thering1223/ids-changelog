@@ -1,0 +1,32 @@
+name: IDS Deploy Report
+
+on:
+  repository_dispatch:
+    types: [figma-publish]
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: cd .github/scripts && npm install
+
+      - name: Run deploy report
+        working-directory: .github/scripts
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WEBHOOK_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+        run: node deploy-report.mjs
