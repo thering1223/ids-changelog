@@ -42,7 +42,7 @@ function parseWebhook() {
 // ============================================================
 function readGitHub() {
   const changelogContent = fs.readFileSync(path.join(ROOT, "changelog/CHANGELOG.md"), "utf-8");
-  const versionMatch = changelogContent.match(/^## v(\d+\.\d+\.\d+)/m);
+  const versionMatch = changelogContent.match(/^\[v(\d+\.\d+\.\d+)\]/m);
   const currentVersion = versionMatch ? versionMatch[1] : "0.0.0";
 
   let g3Prompt = "";
@@ -205,53 +205,34 @@ async function buildReport(webhook, readResult, fetchResult) {
   const deployer = webhook.triggered_by?.handle || "Unknown";
   const email = webhook.triggered_by?.email || "";
 
-  let md = `## v${newVersion}\n`;
-  md += `*${dateStr} · [${deployer}](mailto:${email})*\n\n`;
+  let md = `[v${newVersion}] - ${dateStr}\n`;
+  md += `*[${deployer}](mailto:${email})*\n\n`;
   if (webhook.description) md += `💬 ${webhook.description}\n\n`;
   md += `${g3Summary}\n\n`;
 
-  // Variables
-  if (variablesAdded.length > 0 || variablesDeleted.length > 0 || variablesModified.length > 0) {
-    md += `### Variables\n\n`;
-    if (variablesAdded.length > 0 || variablesDeleted.length > 0) {
-      md += `| 상태 | 항목 |\n|---|---|\n`;
-      for (const v of variablesAdded) md += `| 🟢 | ${v.name} |\n`;
-      for (const v of variablesDeleted) md += `| 🔴 | ${v.name} |\n`;
-      md += `\n`;
-    }
-    if (variablesModified.length > 0) {
-      md += `> ⚠️ 수정된 변수 있음 (${variablesModified.length}개 미확인)\n\n`;
-    }
-  }
+  // 추가
+  const addedLines = [
+    ...variablesAdded.map((v) => `- ${v.name}`),
+    ...stylesAdded.map((s) => `- ${mdLink(s.name, s.nodeId)}`),
+    ...groupedAdded.map((c) => `- ${mdLink(c.setName, c.nodeId)}${c.variantCount > 1 ? ` *(${c.variantCount})*` : ""}`),
+  ];
+  if (addedLines.length > 0) md += `추가\n${addedLines.join("\n")}\n\n`;
 
-  // Styles
-  if (stylesAdded.length > 0 || stylesDeleted.length > 0 || stylesModified.length > 0) {
-    md += `### Styles\n\n`;
-    md += `| 상태 | 항목 |\n|---|---|\n`;
-    for (const s of stylesAdded) md += `| 🟢 | ${mdLink(s.name, s.nodeId)} |\n`;
-    for (const s of stylesModified) md += `| 🟠 | ${mdLink(s.name, s.nodeId)} |\n`;
-    for (const s of stylesDeleted) md += `| 🔴 | ${s.name} |\n`;
-    md += `\n`;
-  }
+  // 수정
+  const modifiedLines = [
+    ...(variablesModified.length > 0 ? [`- ⚠️ 수정된 변수 있음 (${variablesModified.length}개 미확인)`] : []),
+    ...stylesModified.map((s) => `- ${mdLink(s.name, s.nodeId)}`),
+    ...groupedModified.map((c) => `- ${mdLink(c.setName, c.nodeId)}${c.variantCount > 1 ? ` *(${c.variantCount})*` : ""}`),
+  ];
+  if (modifiedLines.length > 0) md += `수정\n${modifiedLines.join("\n")}\n\n`;
 
-  // Components
-  if (groupedAdded.length > 0 || groupedModified.length > 0 || groupedDeleted.length > 0) {
-    md += `### Components\n\n`;
-    md += `| 상태 | 항목 |\n|---|---|\n`;
-    for (const c of groupedAdded) {
-      const cnt = c.variantCount > 1 ? ` *(${c.variantCount})*` : "";
-      md += `| 🟢 | ${mdLink(c.setName, c.nodeId)}${cnt} |\n`;
-    }
-    for (const c of groupedModified) {
-      const cnt = c.variantCount > 1 ? ` *(${c.variantCount})*` : "";
-      md += `| 🟠 | ${mdLink(c.setName, c.nodeId)}${cnt} |\n`;
-    }
-    for (const c of groupedDeleted) {
-      const cnt = c.variantCount > 1 ? ` *(${c.variantCount})*` : "";
-      md += `| 🔴 | ${c.setName}${cnt} |\n`;
-    }
-    md += `\n`;
-  }
+  // 삭제
+  const deletedLines = [
+    ...variablesDeleted.map((v) => `- ${v.name}`),
+    ...stylesDeleted.map((s) => `- ${s.name}`),
+    ...groupedDeleted.map((c) => `- ${c.setName}${c.variantCount > 1 ? ` *(${c.variantCount})*` : ""}`),
+  ];
+  if (deletedLines.length > 0) md += `삭제\n${deletedLines.join("\n")}\n\n`;
 
   return {
     newVersion,
