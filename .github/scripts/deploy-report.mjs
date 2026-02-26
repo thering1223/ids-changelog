@@ -207,7 +207,6 @@ async function buildReport(webhook, readResult, fetchResult) {
 
   let md = `[v${newVersion}] - ${dateStr}\n`;
   md += `*[${deployer}](mailto:${email})*\n\n`;
-  if (webhook.description) md += `💬 ${webhook.description}\n\n`;
   md += `${g3Summary}\n\n`;
 
   // 추가
@@ -351,7 +350,7 @@ async function notifySlack(webhook, reportResult) {
   const bodyText = [`*v${newVersion}*\n${g3Summary}`, ...sections].join("\n\n").trim();
 
   const blocks = [
-    { type: "section", text: { type: "mrkdwn", text: `updated: <mailto:${email}|${deployer}>${webhook.description ? `\n💬 "${webhook.description}"` : ""}` } },
+    { type: "section", text: { type: "mrkdwn", text: `updated: <mailto:${email}|${deployer}>` } },
     { type: "divider" },
     { type: "section", text: { type: "mrkdwn", text: bodyText || `*v${newVersion}*\n변경 사항 없음` } },
     { type: "divider" },
