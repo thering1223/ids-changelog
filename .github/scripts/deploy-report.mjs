@@ -363,6 +363,24 @@ async function diffAndReport(webhook, readResult, fetchResult) {
     }
   }
 
+  // 추가/삭제는 containingComponentSet 단위로 묶어 표시 (수정은 유지)
+  const groupBySet = (status) =>
+    Object.values(
+      componentsDiff
+        .filter((d) => d.status === status)
+        .reduce((acc, d) => {
+          const key = d.containingComponentSet || d.name;
+          if (!acc[key]) acc[key] = { ...d, variantCount: 1 };
+          else acc[key].variantCount++;
+          return acc;
+        }, {})
+    );
+  const displayComponentsDiff = [
+    ...groupBySet("added"),
+    ...componentsDiff.filter((d) => d.status === "modified"),
+    ...groupBySet("deleted"),
+  ];
+
   // ==============================
   // STEP 4: SemVer 계산
   // ==============================
@@ -512,11 +530,11 @@ async function diffAndReport(webhook, readResult, fetchResult) {
     changelogMd += `\n`;
   }
 
-  if (componentsDiff.length > 0) {
+  if (displayComponentsDiff.length > 0) {
     changelogMd += `### Components\n`;
     changelogMd += `| 상태 | 분류 | 항목 | 속성 | 현재값 | 이전값 |\n`;
     changelogMd += `|---|---|---|---|---|---|\n`;
-    const sorted = [...componentsDiff].sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
+    const sorted = [...displayComponentsDiff].sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
     for (const d of sorted) {
       const emoji = statusEmoji[d.status];
       const cascade = g1Result.find((g) => g.name === d.name);
@@ -526,7 +544,10 @@ async function diffAndReport(webhook, readResult, fetchResult) {
       const setCell = isStandalone ? mdLink(d.containingComponentSet, d.nodeId) : (d.containingComponentSet || "-");
       const itemCell = isStandalone ? "-" : mdLink(`${variantName}${note}`, d.nodeId);
       if (d.status === "added" || d.status === "deleted") {
-        changelogMd += `| ${emoji} | ${setCell} | ${itemCell} | - | - | - |\n`;
+        const setName = d.containingComponentSet || d.name;
+        const countNote = d.variantCount > 1 ? ` *(${d.variantCount})*` : "";
+        const setLink = d.status === "added" ? mdLink(setName, d.nodeId) : setName;
+        changelogMd += `| ${emoji} | ${setLink}${countNote} | - | - | - | - |\n`;
       } else if (d.changes?.length > 0) {
         const first = d.changes[0];
         changelogMd += `| ${emoji} | ${setCell} | ${itemCell} | ${first.path} | ${resolveToken(first.newValue)} | ${resolveToken(first.oldValue)} |\n`;
@@ -686,7 +707,7 @@ async function diffAndReport(webhook, readResult, fetchResult) {
     unknownVarNames: variablesDiff.filter((d) => d.valueUnknown).map((d) => d.name),
     variablesDiff,
     stylesDiff,
-    componentsDiff,
+    componentsDiff: displayComponentsDiff,
     stats: {
       added: allDiffs.filter((d) => d.status === "added").length,
       modified: allDiffs.filter((d) => d.status === "modified").length,
