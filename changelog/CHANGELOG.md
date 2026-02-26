@@ -1,4 +1,4 @@
-# IDS 2.0 Changelog
+# IDS 2.0 Figma Changelog
 
 All notable changes to this project will be documented in this file.
 
