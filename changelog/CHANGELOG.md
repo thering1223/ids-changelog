@@ -1,7 +1,6 @@
 # IDS 2.0 Changelog
 
 ---
-
 [v0.1.0] - 2026-02-26
 *[juneui](mailto:juneui@ab-z.com)*
 
