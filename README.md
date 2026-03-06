@@ -48,3 +48,9 @@ console.log(x)
   |------|------|
   | **Alice** | [profile](https://example.com) |
   | `Bob` | *designer* |
+
+
+  - **굵은 항목**                                                                                              
+  - *기울임 항목*                                           
+  - `코드 항목`                                                                                                
+  - [링크 항목](https://example.com)      
