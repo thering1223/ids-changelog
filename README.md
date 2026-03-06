@@ -43,3 +43,8 @@ console.log(x)
 | Bob | Design |
 
 **Bold text** and *italic text* and `inline code` together.
+
+| Name | Note |
+  |------|------|
+  | **Alice** | [profile](https://example.com) |
+  | `Bob` | *designer* |
