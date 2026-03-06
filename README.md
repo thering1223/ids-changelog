@@ -5,7 +5,6 @@ This is a paragraph with plain text.
 ## Heading 2
 
 ### Heading 3
-
 ---
 
 A paragraph with a [link](https://example.com) inside it.
