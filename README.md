@@ -1,55 +1,25 @@
-# 한글 Test Document
+# figmd
 
-This is a paragraph with plain text.
+**Bring your GitHub docs into Figma.**
 
-## Heading 2
+Specs, PRDs, style guides — tired of switching tabs to check documents while designing? figmd renders .md files from GitHub directly on the canvas. Documents and design, side by side.
 
-### Heading 3
----
+## Features
 
-A paragraph with a [link](https://example.com) inside it.
+- Supports headings, lists, tables, code blocks, checkboxes, blockquotes, and more
+- Bold, italic, strikethrough, inline code, links
+- Access private repositories with a GitHub Personal Access Token
+- One-click refresh to sync the latest content
+- Click the filename to open the original GitHub page
 
-- bullet one
-- bullet two
-- bullet three
+## How to use
 
-1. ordered one
-2. ordered two
-3. ordered three
+1. Add the widget to your Figma canvas
+2. Click the settings icon
+3. Paste a GitHub markdown file URL
+4. Click Save — your markdown is rendered on the canvas
 
-> This is a blockquote.
-> It can have multiple lines.
->
-> > 인용문 - 남의 말이나 글에서 직접 또는 간접으로 따온 문장.
-> _(네이버 국어 사전)_
+## Notes
 
-BREAK!
-
-> 인용문을 작성하세요!
->> 중첩된 인용문(nested blockquote)을 만들 수 있습니다.
->>> 중중첩 인용문 1
->>> 중중첩 인용문 2
->>> 중중첩 인용문 3
-
-```js
-const x = 1
-console.log(x)
-```
-
-| Name | Role |
-|------|------|
-| Alice | Dev |
-| Bob | Design |
-
-**Bold text** and *italic text* and `inline code` together.
-
-| Name | Note |
-  |------|------|
-  | **Alice** | [profile](https://example.com) |
-  | `Bob` | *designer* |
-
-
-  - **굵은 항목**                                                                                              
-  - *기울임 항목*                                           
-  - `코드 항목`                                                                                                
-  - [링크 항목](https://example.com)      
+- Images, HTML, and math expressions are not supported
+- Links are displayed in blue but are not clickable (Figma widget limitation)
