@@ -1,4 +1,4 @@
-# figmd
+# Figmd
 
 **Bring your GitHub docs into Figma.**
 
